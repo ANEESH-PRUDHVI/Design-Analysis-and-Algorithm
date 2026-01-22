@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int binarySearch(int arr[], int low, int high, int x) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == x) return mid;
+        if (arr[mid] < x) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int n, x;
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter %d elements in SORTED order:\n", n);
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+
+    printf("Enter number to search: ");
+    scanf("%d", &x);
+
+    int result = binarySearch(arr, 0, n - 1, x);
+    if (result != -1) printf("Found at index %d\n", result);
+    else printf("Not found.\n");
+    return 0;
+}
