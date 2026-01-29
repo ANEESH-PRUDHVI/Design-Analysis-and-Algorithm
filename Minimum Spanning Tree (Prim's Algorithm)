@@ -1,0 +1,35 @@
+def prims_algorithm():
+    v_count = int(input("Enter number of vertices: "))
+    print("Enter the adjacency matrix (use 0 for no edge/self-loops):")
+    
+    graph = []
+    for i in range(v_count):
+        graph.append(list(map(int, input().split())))
+
+    selected = [False] * v_count
+    no_edges = 0
+    selected[0] = True # Start with the first vertex
+    total_cost = 0
+
+    print("\nEdge : Weight")
+    while no_edges < v_count - 1:
+        minimum = float('inf')
+        x, y = 0, 0
+        
+        # Find the smallest edge connecting selected to unselected vertices
+        for i in range(v_count):
+            if selected[i]:
+                for j in range(v_count):
+                    if not selected[j] and graph[i][j] > 0:
+                        if minimum > graph[i][j]:
+                            minimum = graph[i][j]
+                            x, y = i, j
+        
+        print(f"{x}-{y} : {graph[x][y]}")
+        selected[y] = True
+        total_cost += graph[x][y]
+        no_edges += 1
+        
+    print(f"Total Cost of MST: {total_cost}")
+
+prims_algorithm()
